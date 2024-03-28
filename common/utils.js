@@ -24,12 +24,7 @@ export function sizeOfShape(shape) {
 export async function getBufferFromUrl(url) {
   let arrayBuffer;
   if (globalThis.fetch) {
-    const response = await fetch(url, {
-      mode: 'cors',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    });
+    const response = await fetch(url);
     arrayBuffer = await response.arrayBuffer();
   } else {
     const fs = await import('fs');
