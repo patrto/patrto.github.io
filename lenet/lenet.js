@@ -25,7 +25,10 @@ export class LeNet {
       throw new Error('Incorrect weights file');
     }
 
-    this.context_ = await navigator.ml.createContext(contextOptions);
+    let adapter = await navigator.gpu.requestAdapter();
+    let device = await adapter.requestDevice();
+
+    this.context_ = await navigator.ml.createContext(device);
     this.builder_ = new MLGraphBuilder(this.context_);
     const inputShape = /* nchw */ [1, 1, 28, 28];
     const inputDesc = {
